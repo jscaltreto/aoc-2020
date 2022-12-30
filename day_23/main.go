@@ -2,18 +2,25 @@ package main
 
 import (
 	"fmt"
+	"log"
+	"os"
 	"strconv"
 	"strings"
 )
 
-const (
-	INPUT = "974618352"
-	// INPUT = "389125467"
-)
+const INPUT = "input.txt"
 
 func main() {
 	a()
 	b()
+}
+
+func LoadInput() string {
+	data, err := os.ReadFile(INPUT)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return strings.TrimSuffix(string(data), "\n")
 }
 
 type Cup struct {
@@ -52,7 +59,7 @@ func move(curCup *Cup, cupMap map[int]*Cup) *Cup {
 func a() {
 	cupMap := make(map[int]*Cup)
 
-	startCups := strings.Split(INPUT, "")
+	startCups := strings.Split(LoadInput(), "")
 	firstCup, _ := strconv.Atoi(startCups[0])
 	curCup := &Cup{firstCup, nil}
 	lastCup := curCup
@@ -80,7 +87,7 @@ func a() {
 func b() {
 	cupMap := make(map[int]*Cup)
 
-	startCups := strings.Split(INPUT, "")
+	startCups := strings.Split(LoadInput(), "")
 	firstCup, _ := strconv.Atoi(startCups[0])
 	curCup := &Cup{firstCup, nil}
 	lastCup := curCup
